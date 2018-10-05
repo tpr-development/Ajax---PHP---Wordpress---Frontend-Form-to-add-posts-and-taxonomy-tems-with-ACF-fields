@@ -127,10 +127,12 @@ add_action( 'widgets_init', 'cdb_widgets_init1' );
 function materialize_scripts_enqueue() {
 		wp_register_style( 'normalize-css',  get_template_directory_uri().'/normalize.css', false, NULL, 'all' );
     wp_register_style( 'materialize-css', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css', false, NULL, 'all' );
+		wp_register_style( 'selectSearch-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css', false, NULL, 'all' );
 		wp_register_style('custom-css', get_template_directory_uri().'/custom.css', false, NULL, 'all');
     wp_register_style( 'font-css', 'https://fonts.googleapis.com/icon?family=Material+Icons', false, NULL, 'all' );
     wp_enqueue_style( 'normalize-css' );
     wp_enqueue_style( 'materialize-css' );
+		wp_enqueue_style( 'selectSearch-css' );
 		wp_enqueue_style( 'custom-css' );
     wp_enqueue_style( 'font-css' );
 }
@@ -263,20 +265,10 @@ return apply_filters('wp_trim_excerpt', $text, $raw_excerpt);
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 add_filter('get_the_excerpt', 'custom_wp_trim_excerpt');
 
-// function __update_post_meta( $post_id, $field_name, $value = '' )
-// {
-//     if ( empty( $value ) OR ! $value )
-//     {
-//         delete_post_meta( $post_id, $field_name );
-//     }
-//     elseif ( ! get_post_meta( $post_id, $field_name ) )
-//     {
-//         add_post_meta( $post_id, $field_name, $value );
-//     }
-//     else
-//     {
-//         update_post_meta( $post_id, $field_name, $value );
-//     }
-// }
+// Function to change sender name
+function wpb_sender_name( $original_email_from ) {
+return 'Abhinandan';
+}
 
-// upload function
+// Hooking up our functions to WordPress filters
+add_filter( 'wp_mail_from_name', 'wpb_sender_name' );

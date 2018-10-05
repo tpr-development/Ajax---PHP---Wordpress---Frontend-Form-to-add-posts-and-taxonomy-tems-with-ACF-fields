@@ -8,7 +8,7 @@ get_header();
 <!-- Page Title -->
 <div class="page-title-container">
 	<div class="col m12 center-align">
-		<h1 class="page-title screen-reader-text"><?php the_title(); ?></h1>
+		<h3 class="page-title screen-reader-text"><?php the_title(); ?></h3>
 	</div>
 </div>
 <!-- Page content -->
@@ -39,84 +39,118 @@ get_header();
 			<?php the_posts_navigation(); ?>
 
 		<?php endif; ?>
+		<ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_list</i> Advanced Filter</div>
     <?php
-		// Get category List
-		$table = '';
-		$categories = get_categories( array(
-		    'orderby' => 'name',
-		    'order'   => 'ASC'
-		) );
-		$dataPoints = array();
-		$dataPoints["cols"][] = array("label"=>"Category", "type" => "string");
-		$dataPoints["cols"][] = array("label" => "Articles", "type" => "number");
-		foreach ($categories as $category) {
-			// get number of posts in each category
-			if($category->slug != 'uncategorized'){
-				$allPosts_args = array(
-					'posts_per_page' => -1,
-					'category_name' => $category->slug,
-		    	'date_query' => array(
-		        array(
-		            'column' => 'post_date_gmt',
-		            'after'  => '90 days ago',
-		        ),
-		    	),
-		    );
-				$allPosts = new WP_Query($allPosts_args);
-				$count = $allPosts->post_count;
-				$dataPoints["rows"][] = array("c"=> array(array("v"=>$category->name), array("v" => $count)));
-			}
+		// Check user role
+		$user = wp_get_current_user();
+		$user_role = $user->roles[0]; // Current Usr Role
+		$user_id = $user->ID;
+		if($user_role == 'author'){ // Condition for employees
+			$prs_arg = array(
+				'post_status'=>'publish',
+				'author' => $user_id
+			);
+		} else if($user_role == 'contributor'){ // condition for Vertical heads
+			$prs_arg = array(
+				'post_status'=>'publish',
+				'meta_query' => array(
+					array(
+						'key'     => 'need_approval_from',
+						'value'   => $user_id,
+						'compare' => '=',
+					),
+				),
+			);
+		} else if($user_role == 'editor'){ // Condition for Finance head
+			$prs_arg = array('post_status'=>'publish');
+		} else { // Condition for administrator
+			$prs_arg = array('post_status'=>'publish');
 		}
-		$var = JSON_encode($dataPoints);
-    ?>
+		?>
+				<div class="collapsible-body filterFor-<?php echo $user_role; ?>">
+					<div class="row">
+						<div class="col m3 verticalFilter">
+							<div class="input-field col s12">
+								<select id="selectVerticalFilter" class="singleSelect">
+									<option value="all" disabled selected>Choose your option</option>
+							<?php $verticals = get_terms('vertical');
+							foreach($verticals as $vertical){
+								?>
+								<option value="<?php echo $vertical->slug; ?>"><?php echo $vertical->name; ?></option>
+								<?php
+							} ?>
+								</select>
+								<label>Select Vertical</label>
+							</div>
+						</div>
+						<div class="col m3 clientFilter">
+							<div class="input-field col s12">
+								<select id="selectClientFilter" class="singleSelect">
+									<option value="all" disabled selected>Choose your option</option>
+							<?php $clients = get_terms('client');
+							foreach($clients as $client){
+								?>
+								<option value="<?php echo $client->slug; ?>"><?php echo $client->name; ?></option>
+								<?php
+							} ?>
+								</select>
+								<label>Select Client</label>
+							</div>
+						</div>
+						<div class="col m3 vendorFilter">
+							<div class="input-field col s12">
+								<select id="selectVendorFilter" class="singleSelect">
+									<option value="all" disabled selected>Choose your option</option>
+							<?php $vendors = get_terms('vendor');
+							foreach($vendors as $vendor){
+								?>
+								<option value="<?php echo $vendor->slug; ?>"><?php echo $vendor->name; ?></option>
+								<?php
+							} ?>
+								</select>
+								<label>Select Vendor</label>
+							</div>
+						</div>
+						<div class="col m3 statusFilter">
+							<div class="input-field col s12">
+								<select id="selectStatusFilter" class="singleSelect">
+									<option value="all" disabled selected>Choose your option</option>
+									<option value="Open">Open</option>
+									<option value="Closed">Closed</option>
+								</select>
+								<label>Select Status</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<table class="striped prList" id="showing_<?php echo $user_role; ?>">
+			<thead>
+				<tr>
+					<td>Purchase requision</td>
+					<td>Submitted on</td>
+					<td>Vertical</td>
+					<td>Client</td>
+					<td>Vendor</td>
+					<td>Status</td>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$prs = new WP_Query($prs_arg);
+				if($prs -> have_posts()): while($prs -> have_posts()): $prs -> the_post();
+					get_template_part('template-parts/archive', 'grid');
+				endwhile; endif;
+				?>
+			</tbody>
+		</table>
 	</main><!-- #main -->
 </div><!-- #primary -->
 </div><!-- #row -->
-	<div class="row">
-		<div class="col m3 s6">
-			<?php
-				$date = date("Y/m/d"); // 2018/07/05/
-				$url = site_url() . '/'.$date;
-			?>
-			<a class="card" href="<?php echo $url; ?>"><div class="card-content">Todays Articles</div></a>
-		</div>
-		<div class="col m3 s6">
-			<a class="card" href="#"><div class="card-content">Weekly Reports</div></a>
-		</div>
-	</div>
+
 </div><!-- .container -->
 </div><!-- .page-content -->
-<div class="homeChart">
-	<div class="container">
-		<div class="row">
-			<h5>Number of Articles last 3 months</h5>
-    	<div id="columnchart_material" style="width: 100%; height: 500px;"></div>
-		</div>
-	</div>
-</div>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-			google.charts.load('current', {packages: ['corechart', 'bar']});
-			google.charts.setOnLoadCallback(drawBasic);
-
-			function drawBasic() {
-				var data = new google.visualization.DataTable(<?php echo $var; ?>);
-				var options = {
-					// title: 'Population of Largest U.S. Cities',
-					hAxis: {
-						title: 'Number of Articles',
-						minValue: 0
-					},
-					vAxis: {
-						title: 'Categories'
-					},
-					legend: 'none',
-					chartArea:{top:20,right:0,bottom:50},
-					backgroundColor: { fill:'transparent' }
-				};
-				var chart = new google.visualization.BarChart(document.getElementById('columnchart_material'));
-				chart.draw(data, options);
-		}
-    </script>
 <?php get_footer(); ?>

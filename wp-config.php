@@ -20,19 +20,19 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'thePurchaseTool');
+define('DB_NAME', 'db203645_pur');
 
 /** MySQL database username */
-define('DB_USER', 'root');
+define('DB_USER', '1clk_wp_gdOLQjh');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'pGZhDhjd');
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', $_ENV{DATABASE_SERVER});
 
 /** Database Charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8mb4');
+define('DB_CHARSET', 'utf8');
 
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
@@ -46,14 +46,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'SGFtS$n0uRe nZ|2atq-ijn?+Z)Of[{Vboo{?en~yfO_5NnrH G>5wO_l.0_{&4M');
-define('SECURE_AUTH_KEY',  'F[ro{q!7]UiNSO(IweI~4i@!0+nTFs_73?5jM>iV_x:7Ze$kELTIzJ n1EB J&sB');
-define('LOGGED_IN_KEY',    ']t0bCBryxgHOI@8KQ}n.nfDWPm|]{pE(^^Yx72kZqpUv[mB4@qZz&{TMTAI-95di');
-define('NONCE_KEY',        'tbA8e|l$c*.)M@SA{`@L(aj8tx`=GfHQj3*3j8/z<9Va7<Mu~+wn7qofYp%|.1s1');
-define('AUTH_SALT',        '.0@)<B9bi.:jnsx1.)_>T/CHF!z0>^.wiu`=2lG$#a#5JA[}_$75Erf/|h`gv>t6');
-define('SECURE_AUTH_SALT', 'm2/J$aDnSc7lsO:|W[wfPnrzXtK=pLiI[8GfC~rQ;RhV@7ZMR8ORq0]pZ681j{A7');
-define('LOGGED_IN_SALT',   'N1/C$B|G8h-i~4g{cv{na?`eYp&p&Hi|hOXK#!0TOoKIb@3bWdgq~@`xO@XdhTU=');
-define('NONCE_SALT',       'Ow6s:kwj]6Ht03(4kLHsu$:9sNdf[qzD{Lz`+=SGe90hhg5Zo?GRG)>T.qoYLIX ');
+define('AUTH_KEY',         'ASLqmXWb JAWgPEN6 KACXyiUa RcpbrT6i QgdrmDf4');
+define('SECURE_AUTH_KEY',  'veAFPdHJ LVaDA51J UhvCdAwA tLSkzYm6 d4Yb4XOa');
+define('LOGGED_IN_KEY',    'XhxgYUsq DIr7wNTt OReuzicj A44KCw7k wvx3eeuB');
+define('NONCE_KEY',        'HCaYC8MC qKwUh14o JWmsCWOJ 7J65lyVD 8iEnNc6U');
+define('AUTH_SALT',        'qx3bLiae 3H5PAwrc 51DMJGjB cHRclVbD pBxrS3pP');
+define('SECURE_AUTH_SALT', 'V5dzpUNI mIgmt2fG dMnLgCDB l58OLMwv GxFP7Qte');
+define('LOGGED_IN_SALT',   't6zG8vrg 3oNd6upi 8WwFTMrD aKztoG8U zcqZKZzS');
+define('NONCE_SALT',       'smz48Qaa nANGAzln SHv1DFoY MqAa1g2j MvCChZMx');
 
 /**#@-*/
 
@@ -87,5 +87,3 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
-
-define( 'WP_MEMORY_LIMIT', '256M' );

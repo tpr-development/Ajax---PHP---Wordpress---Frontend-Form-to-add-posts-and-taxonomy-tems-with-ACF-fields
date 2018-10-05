@@ -26,7 +26,7 @@ get_header();
 					 * If you want to override this in a child theme, then include a file
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 					 */
-					get_template_part( 'template-parts/content', 'page' );
+					the_content();
 				?>
 				<form action="<?php echo site_url() ?>/vendor-insert.php" method="POST" id="vendorSubmit">
           <!-- Term Name -->
@@ -48,6 +48,13 @@ get_header();
 						<div class="input-field col s12">
 		          <input id="bank_ac_name" type="text" class="validate" required="" aria-required="true">
 		          <label for="bank_ac_name">Bank A/C Name</label>
+		        </div>
+					</div>
+					<!-- Bank name -->
+					<div class="row">
+						<div class="input-field col s12">
+		          <input id="bank_name" type="text" class="validate" required="" aria-required="true">
+		          <label for="bank_name">Name of the Bank</label>
 		        </div>
 					</div>
           <!-- A/C number -->

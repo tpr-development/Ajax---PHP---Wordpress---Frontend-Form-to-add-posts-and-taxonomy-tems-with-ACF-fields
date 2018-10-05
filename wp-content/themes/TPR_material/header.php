@@ -15,6 +15,9 @@
 //    header('Location: /wp-login.php');
 //    exit();
 //}
+if ( !is_user_logged_in() ) {
+   auth_redirect();
+}
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
     <head>
@@ -32,7 +35,7 @@
         <nav class="top-bar">
           <div class="nav-wrapper">
             <?php $url = site_url(); ?>
-            <a href="<?php echo $url; ?>" class="brand-logo"><img src="<?php echo get_template_directory_uri(); ?>/img/google_PNG2.png" alt="Google media monitor" /> <?php bloginfo( 'name' ); ?></a>
+            <a href="<?php echo $url; ?>" class="brand-logo"><img src="<?php echo get_template_directory_uri(); ?>/img/practice-logo.png" alt="Google media monitor" /> <?php bloginfo( 'name' ); ?></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li><a href="<?php echo $url; ?>/wp-login.php?action=logout">Log Out</a></li>
               <li><a href="#" data-target="slide-out" class="sidenav-trigger" style="display: block;"><i class="material-icons">menu</i></a></li>
@@ -40,14 +43,7 @@
           </div>
         </nav>
         <ul id="slide-out" class="sidenav">
-          <a href="<?php echo $url; ?>" class="branding"><img src="<?php echo get_template_directory_uri(); ?>/img/google_PNG2.png" alt="Google media monitor" class="responsive-img"/> <div><?php bloginfo( 'name' ); ?></div></a>
-          <li><a href="<?php echo $url; ?>/all-weekly-reports/" class="waves-effect">Weekly Reports</a></li>
-          <li><div class="divider"></div></li>
-          <li><a class="subheader waves-effect">Daily Reports</a></li>
-          <!-- <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
-          <?php
-          if ( is_active_sidebar( 'sidebar-1' ) ) {
-          	 dynamic_sidebar( 'sidebar-1' );
-          }
-          ?>
+          <a href="<?php echo $url; ?>" class="branding"><?php bloginfo( 'name' ); ?></a>
+          <li><a href="<?php echo $url; ?>/create-a-post/" class="waves-effect">Create PR</a></li>
+          <li><a href="<?php echo $url; ?>/add-a-vendor/" class="waves-effect">Add Vendor</a></li>
         </ul>

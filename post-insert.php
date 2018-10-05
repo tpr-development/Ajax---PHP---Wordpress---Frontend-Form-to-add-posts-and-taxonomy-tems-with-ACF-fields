@@ -49,7 +49,7 @@ for($i = 0; $i < $count; $i++) {
   $order_value[] = array($order_description_key => $orderDescription[$i], $order_quantity_key => $orderQuantity[$i], $order_rate_key => $orderRate[$i], $order_total_key => $orderTotal[$i]);
 }
 update_field( $order_field_key, $order_value, $post_id );
-
+update_field( 'field_5b7ba19c60af5', 'Open', $post_id ); // Set Status to open
 $post_url = get_permalink( $post_id );
 // $user_info = get_userdata($userID);
 // $user_email = $user_info->user_email;

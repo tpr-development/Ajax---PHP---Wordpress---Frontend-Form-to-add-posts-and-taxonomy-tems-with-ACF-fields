@@ -71,7 +71,8 @@ get_header();
 					<!-- Vendor -->
 					<div class="row">
 						<div class="input-field col s12">
-					    <select id="vendor" required="" aria-required="true">
+							<div class="searchSelectLabel"><small>Select Vendor</small></div>
+					    <select id="vendor" required="" aria-required="true" class="js-example-basic-single">
 					      <option value="*" selected>Choose your option</option>
 								<?php
                     if( $vendors = get_terms( 'vendor', 'orderby=name&hide_empty=0' ) ) :
@@ -81,13 +82,20 @@ get_header();
                     endif;
                 ?>
 					    </select>
-					    <label>Select Vendor</label>
 					  </div>
 					</div>
+					<!-- Vendor autocomplete -->
+					<!-- <div class="row">
+						<div class="input-field col s12">
+		          <input type="text" id="autocomplete-input" class="autocomplete" placeholder="Type vendor name">
+		          <label for="autocomplete-input">Vendor</label>
+		        </div>
+					</div> -->
 					<!-- Client -->
 					<div class="row">
 						<div class="input-field col s12">
-					    <select id="client" required="" aria-required="true">
+							<div class="searchSelectLabel"><small>Select Client</small></div>
+					    <select id="client" required="" aria-required="true" class="js-example-basic-single">
 					      <option value="*" selected>Choose your option</option>
 								<?php
                     if( $clients = get_terms( 'client', 'orderby=name&hide_empty=0' ) ) :
@@ -97,13 +105,13 @@ get_header();
                     endif;
                 ?>
 					    </select>
-					    <label>Select Client</label>
+
 					  </div>
 					</div>
 					<!-- Vertical -->
 					<div class="row">
 						<div class="input-field col s12">
-					    <select id="vertical" required="" aria-required="true">
+					    <select id="vertical" required="" aria-required="true" class="singleSelect">
 					      <option value="*" selected>Choose your option</option>
 								<?php
                     if( $verticals = get_terms( 'vertical', 'orderby=name&hide_empty=0' ) ) :
@@ -119,10 +127,10 @@ get_header();
 					<!-- Need approval from -->
 					<div class="row">
 						<div class="input-field col s12">
-					    <select id="user" required="" aria-required="true">
+					    <select id="user" required="" aria-required="true" class="singleSelect">
 					      <option value="*" selected>Choose your option</option>
 								<?php
-                    if( $users = get_users( array( 'fields' => array( 'display_name', 'ID' ) ) ) ):
+                    if( $users = get_users( array( 'fields' => array( 'display_name', 'ID' ), 'role' => 'contributor' ) ) ):
                         foreach ( $users as $user ) :
                             echo '<option value="'.$user->ID.'">'. $user->display_name .'</option>';
                         endforeach;
@@ -142,7 +150,7 @@ get_header();
 					<!-- Billable or not -->
 					<div class="row">
 						<div class="input-field col s3">
-							<select id="billType" required="" aria-required="true">
+							<select id="billType" required="" aria-required="true" class="singleSelect">
 								<option value="Billable" selected>Billable</option>
 								<option value="Non-billable">Non-billable</option>
 							</select>

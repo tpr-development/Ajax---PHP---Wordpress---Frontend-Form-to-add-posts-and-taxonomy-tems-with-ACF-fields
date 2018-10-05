@@ -1,11 +1,32 @@
+/* @override 
+	http://purchase.the-practice.net/wp-content/themes/TPR_material/custom.css */
+
+#noEmpty {
+	color: red;
+	display: none;
+}
+
 /* Custom Styling */
-.successMessage{
+.sidenav {
+	padding-top: 49px;
+}
+.sidenav .branding {
+	font-size: 2rem;
+	color: teal;
+	font-weight: bold;
+	padding: 0 32px;
+}
+.prList thead {
+	background-color: #b8e8ff;
+	font-weight: bold;
+}
+.successMessage, .approveSuccessMessage{
   background-color: #3AD3B5;
   color: #fff;
   padding: 1rem 1.5rem;
   display: none;
 }
-.successMessage a{color: #fff; text-decoration: underline;}
+.successMessage a, .approveSuccessMessage a{color: #fff; text-decoration: underline;}
 .approveStatus{ background-color: #f7f7f7; padding: .7rem 1rem; margin-top: 1rem;}
 .approveStatus .approvedByDisplayName{text-decoration: underline;}
 nav{
@@ -27,186 +48,37 @@ nav .brand-logo img{
   display: block;
   float: left;
 }
-.sidenav li a{
-  border-left: 3px solid #FE616A;
-  background-color: #ffedee;
+.site-footer {
+	background-color: #e6e6e6;
+	padding: 3rem 0;
 }
-.sidenav li a.subheader{
-  border: none;
-  background-color: #fff;
+.site-footer .row {
+	margin-bottom: 0;
 }
-.sidenav li a:hover{
-  background-color: #fbc0c4;
+.tpr-logo img {
+	max-height: 36px;
 }
-.branding{
-  display: block;
-  margin: 2.5rem;
-  text-align: center;
-  color: #000;
-  font-size: 1.2rem;
+.filterFor-author .verticalFilter, .filterFor-author .clientFilter{ /*For employees*/
+	display: none;
 }
-.branding img{max-width: 120px;}
-.sidenav .widget_calendar{
-  margin: 1rem 1.5rem;
+.filterFor-contributor .verticalFilter { /* Vertical head */
+	display: none;
 }
-/* Link within card */
-.card a{
-  font-weight: bold;
-  text-decoration: underline;
-  text-transform: uppercase;
+.searchSelectLabel small {
+	top: -4px;
+    position: relative;
+    color: #9e9e9e;
+    font-size: .8rem;
 }
-.card a.waves-effect.waves-light.btn-small {
-    font-weight: normal;
-    margin-left: 1rem;
-    text-decoration: none;
+.input-field .select2-container--default .select2-selection--single {
+	border: none;
+    border-bottom: 1px solid #999;
+    border-radius: 0;
+    height: 3rem;
 }
-/* Weekly report */
-.page-title-container{
-  background-color: #3F83FD;
-  padding: 1rem 0;
-}
-.page-title-container h1.page-title{
-  font-size: 1.4rem;
-  line-height: 1.4rem;
-  margin: 0;
-  color: #fff;
-  display: inline-block;
-}
-.page-template-page-weeklyReport .page-content{
-  background: url(/mediaMonitor/wp-content/themes/TPR_material/img/desktop_dialog.jpg) repeat center center;
-  background-size: cover;
-  padding: 4rem 0 3rem;
-  color: #fff;
-}
-.sectionTitle{
-  font-size: 20px;
-}
-.sectionTitle:after{
-  background-color: #fff;
-  height: 2px;
-  width: 20px;
-  clear: both;
-  content: '';
-  display: block;
-  margin-top: .3em;
-}
-a.card{
-  display: block;
-}
-.foodforthought{
-  margin-top: 1rem;
-  -webkit-column-count: 2;
-  -moz-column-count: 2;
-  column-count: 2;
-  -webkit-column-gap: 40px;
-  -moz-column-gap: 40px;
-  column-gap: 40px;
-}
-.foodforthought p{margin: 0;}
-.fortnight-articles{
-  padding: 4rem 0 3rem;
-}
-.fortnight-articles .sectionTitle:after{background-color: #a2a2a2;}
-.dashboard{
-  background-color: #f4f4f4;
-  padding: 4rem 0 3rem;
-}
-span.date {
-  color: #868686;
-  font-size: .8rem;
-}
-span.top{
-  text-transform: uppercase;
-  font-size: .6rem;
-  color: #868686;
-  font-weight: bold;
-}
-.chart{
-  width: 100%;
-  padding: 2rem 0;
-}
-.fortnight-articles .card{
-  border-top: 4px solid #a4a4a4;
-  box-shadow: none;
-}
-div.google-visualization-tooltip { padding: .5rem; }
-.fortnight-articles .card:hover{
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-}
-.technology .card{ border-color: #009E57; } .technology .subSectionTitle{ color: #009E57; }
-.environment .card{ border-color: #F8B600; } .environment .subSectionTitle{ color: #F8B600; }
-.regulatory .card{ border-color: #DF4230; } .regulatory .subSectionTitle{ color: #DF4230; }
-.monetary .card{ border-color: #3F83FD; } .monetary .subSectionTitle{ color: #3F83FD; }
-
-.stakeholders-fortnight{
-
-  padding: 4rem 0 3rem;
-}
-.stakeholder{
-  text-align: center;
-}
-.stakeholder .card-title{
-  color: #009E57;
-}
-.stakeholder .card-title:after{
-  height: 3px;
-  background-color: #009E57;
-  width: 20px;
-  content: '';
-  display: block;
-  margin: 10px auto 0;
-}
-.stakeholders-fortnight .sectionTitle{
-  margin-bottom: 1rem;
-}
-.stakeholders-fortnight .sectionTitle:after{
-  background-color: #000;
-}
-.stakeholder .image img{
-  border-radius: 50%;
-}
-.featured-story{
-  padding: 4rem 0 3rem;
-}
-.featured-story .sectionTitle{
-  color: #F8B600;
-  margin-bottom: 1rem;
-}
-.featured-story .sectionTitle:after{
-  background-color: #F8B600;
-}
-.featured-story .sectionTitle:after{background-color: #F8B600;}
-.featured-story .story{
-  border-top: 4px solid #F8B600;
-}
-.contributor-story{
-  padding: 4rem 0 3rem;
-  background-color: #009E57;
-  color: #fff;
-}
-.contributor-story .image img{
-  border-radius: 50%;
-  max-width: 150px;
-}
-.homeChart{
-  background-color: #f4f4f4;
-  padding: 3rem 0 3rem;
-}
-/* Footer Styling */
-footer{
-  margin: 2rem 0;
-}
-.copyright{
-  color: #a2a2a2;
-}
-.tpr-logo{
-  margin-top: 1.2rem;
-}
-.tpr-logo img{
-  display: block;
-  margin: 0 auto;
-  max-width: 150px;
+.input-field .select2-container--default .select2-selection--single .select2-selection__rendered {
+	padding-left: 0;
+	line-height: 40px;
 }
 /* Media Query */
 /* Medium and up */
@@ -219,7 +91,6 @@ footer{
 /* Large and up */
 @media screen and (min-width: 64em) {
   footer{
-    margin: 4rem 0 2rem;
+    margin: 4rem 0 0;
   }
 }
-/* EOF */

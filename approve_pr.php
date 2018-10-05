@@ -6,4 +6,5 @@ require(dirname(__FILE__) . '/wp-load.php');
 $approve_status = array($_POST['approve']);
 $post_id = $_POST['post_id'];
 update_field( 'approve_status', $approve_status, $post_id);
-echo 'Approved';
+$post_url = get_permalink( $post_id );
+echo $post_url;

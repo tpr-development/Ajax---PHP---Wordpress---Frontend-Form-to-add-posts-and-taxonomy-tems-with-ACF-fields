@@ -60,11 +60,11 @@ get_header();
                 </div>
                 <!-- Activity Duration -->
                 <div class="activityDuration">
-                  <p><?php the_field('activity_duration'); ?></p>
+                  <p><strong>Activity Duration:</strong> <?php the_field('activity_duration'); ?></p>
                 </div>
                 <!-- Bill Type -->
                 <div class="billType">
-                  <p><?php the_field('billable_or_non-billable'); ?></p>
+                  <p><strong>Bill Type:</strong><?php the_field('billable_or_non-billable'); ?></p>
                 </div>
                 <!-- Vendor Details -->
                 <div class="vendorDetails">
@@ -126,6 +126,8 @@ get_header();
                     }
                   }
                   else if($user_role == 'contributor'){ // Condition for Vertical Head
+                    $current_user = wp_get_current_user();
+
                     if($approve_status[0] == 'Approved'){
                       echo '<label>
                         <input type="checkbox" checked="checked" disabled="disable"/>
@@ -134,14 +136,23 @@ get_header();
                     } else {
                       echo '<form id="approveForm" action="'.site_url().'/approve_pr.php">
                       <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col s6">
                           <label>
                             <input type="checkbox" id="checkApprove"/>
                             <span>Approved</span>
                           </label>
                         </div>
+                        <div class="input-field col s6">
+                          <label>
+                            <input type="checkbox" id="checkDisApprove"/>
+                            <span>Disapproved</span>
+                            <div><small>If you disapprove, the PR will be deleted and the author will be notified.</small></div>
+                          </label>
+                        </div>
                       </div>
                       <input type="hidden" value="'.get_the_ID().'" id="post_id"/>
+                      <input type="hidden" value="'.$current_user->user_firstname.'" id="current_user"/>
+                      <input type="hidden" value="'.$post->post_author.'" id="author_id"/>
                       <div class="row approveSubmit">
             						<div class="input-field col s12">
             							<button class="btn waves-effect waves-light">Update
@@ -168,6 +179,7 @@ get_header();
                     }
                   }
                 ?>
+                <div class="approveSuccessMessage">Thank you for approving. Email has been sent to Finance Team</div>
                 </div>
                 <!-- PO status -->
                 <div class="po_status">
@@ -175,36 +187,101 @@ get_header();
                   <h5>PO Status</h5>
                   <?php
                   if( $user_role == 'author'){ // Condition for Employee
-
+                    if( have_rows('purchase_order') ){ // already has values
+                      ?>
+                      <table class="poList">
+                        <thead>
+                          <tr>
+                            <td>Purchase Order</td>
+                            <td>Purchase Order Number</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php while( have_rows('purchase_order') ): the_row(); ?>
+                              <tr><td><a href="<?php the_sub_field('url'); ?>" target="_blank"><?php the_sub_field('url'); ?></a></td>
+                              <td><?php the_sub_field('purchase_order_number'); ?></td></tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                      </table>
+                      <?php
+                    } else {
+                      echo '<span class="nill">No Purchase Order has been uploaded yet.</span>';
+                    }
                   }
                   else if($user_role == 'contributor'){ // Condition for Vertical Head
-
-                  }
-                  else if($user_role == 'editor'){ // Condition for Finance Head
-                    if(!empty(get_field('po_'))){
-                      echo '<pre>';
-                      print_r(get_field('po_'));
-                      echo '</pre>';
+                    if( have_rows('purchase_order') ){ // already has values
+                      ?>
+                      <table class="poList">
+                        <thead>
+                          <tr>
+                            <td>Purchase Order</td>
+                            <td>Purchase Order Number</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php while( have_rows('purchase_order') ): the_row(); ?>
+                              <tr><td><a href="<?php the_sub_field('url'); ?>" target="_blank"><?php the_sub_field('url'); ?></a></td>
+                              <td><?php the_sub_field('purchase_order_number'); ?></td></tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                      </table>
+                      <?php
                     } else {
-                      echo '<form enctype="multipart/form-data" id="uploadPO" action="'.site_url().'/upload-po.php">
-                        <div class="row">
-                          <div class="file-field input-field col s12">
-                            <!-- <input type="file" id="sortpicture" name="upload"> -->
-                            <div class="btn">
-              				        <span>Upload PO</span>
-              				        <input type="file" id="sortpicture" name="upload"/>
-              				      </div>
-              				      <div class="file-path-wrapper">
-              				        <input class="file-path validate" type="text" id="fileName">
-              				      </div>
-                            <input type="hidden" value="'.get_the_ID().'" id="post_id_1"/>
-                            <!-- <input class="save-support" name="save_support" type="button" value="Save"> -->
-                          </div>
-                          <div class="input-field col s12">
-                            <input id="po_number" type="number" class="validate" required="" aria-required="true">
-              		          <label for="po_number">PO Number</label>
-                          </div>
-                        </div>
+                      echo '<span class="nill">No Purchase Order has been uploaded yet.</span>';
+                    }
+                    } else if($user_role == 'editor'){ // Condition for Finance Head
+                    if( have_rows('purchase_order') ){ // already has values
+                      ?>
+                      <table class="poList">
+                        <thead>
+                          <tr>
+                            <td>Purchase Order</td>
+                            <td>Purchase Order Number</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php while( have_rows('purchase_order') ): the_row(); ?>
+                              <tr><td><a href="<?php the_sub_field('url'); ?>" target="_blank"><?php the_sub_field('url'); ?></a></td>
+                              <td><?php the_sub_field('purchase_order_number'); ?></td></tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                      </table>
+                      <?php
+                    } else {
+                      echo '<span class="nill">No Purchase Order has been uploaded yet.</span>';
+                    }
+                    $order_status = get_field('order_status');
+                    // print_r($order_status);
+                    if($order_status == 'Open'){ // Show form only if the order is open
+                      echo '<form enctype="multipart/form-data" id="uploadPO" action="'.site_url().'/update-poInfo.php">
+                      <div class="row"><div class="col s12">
+                      <table>
+                        <tr>
+                          <td>
+                            <span id="noEmpty">Please select a file</span>
+                            <div class="file-field input-field">
+                              <!-- <input type="file" id="sortpicture" name="upload"> -->
+                              <div class="btn btn-small">
+              				            <span>Select PO</span>
+              				            <input type="file" id="sortpicture" name="upload"/>
+              				        </div>
+              				        <div class="file-path-wrapper">
+              				            <input class="file-path validate" type="text" id="fileName">
+              				        </div>
+                          </td>
+                          <td>
+                              <button class="btn waves-effect waves-light save-support" name="uploadFile" id="uploadFile">Upload</button>
+                          </td>
+                          <td>
+                            <div class="input-field col s12">
+                              <input id="po_number" type="number" class="validate" required="" aria-required="true">
+                              <label for="po_number">PO Number</label>
+                            </div>
+                          </td>
+                        </tr>
+                      </table></div></div>
+                      <input type="hidden" value="'.get_the_ID().'" id="post_id_1"/>
+                      <!-- <input class="save-support" name="save_support" type="button" value="Save"> -->
                         <div class="row uploadPOSubmit">
               						<div class="input-field col s12">
               							<button class="btn waves-effect waves-light save-support" name="save_support">Update
@@ -214,12 +291,255 @@ get_header();
               						</div>
               					</div>
                        </form>';
+                     }
+                  }
+                  else{ // for Other user roles => admin
+                    if( have_rows('purchase_order') ){ // already has values
+                      ?>
+                      <table class="poList">
+                        <thead>
+                          <tr>
+                            <td>Purchase Order</td>
+                            <td>Purchase Order Number</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php while( have_rows('purchase_order') ): the_row(); ?>
+                              <tr>
+                              <td><a href="<?php the_sub_field('url'); ?>" target="_blank"><?php the_sub_field('url'); ?></a></td>
+                              <td><?php the_sub_field('purchase_order_number'); ?></td></tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                      </table>
+                      <?php
+                    } else {
+                      echo '<span class="nill">No Purchase Order has been uploaded yet.</span>';
                     }
                   }
-                  else{
-
+                  ?>
+                </div>
+                <!-- vendor bill -->
+                <div class="vendor-bill">
+                  <hr/>
+                  <h5>Vendor Bill</h5>
+                  <?php
+                  if($user_role == 'author'){ // condition for employees
+                    if(get_field('vendor_bill')){ // already has bill
+                      ?>
+                      <div class="billResult">
+                        <table>
+                            <tr>
+                              <td>Vendor Bill</td>
+                              <td><a href="<?php the_field('vendor_bill'); ?>" target="_blank"><?php the_field('vendor_bill'); ?></a></td>
+                            </tr>
+                        </table>
+                      </div>
+                      <?php
+                    } else {
+                      echo '<span class="nillBill">No bill has been uploaded yet.</span>';
+                    }
+                  } else if($user_role == 'contributor'){ // condition for vertical head
+                    if(get_field('vendor_bill')){ // already has bill
+                      ?>
+                      <div class="billResult">
+                        <table>
+                            <tr>
+                              <td>Vendor Bill</td>
+                              <td><a href="<?php the_field('vendor_bill'); ?>" target="_blank"><?php the_field('vendor_bill'); ?></a></td>
+                            </tr>
+                        </table>
+                      </div>
+                      <?php
+                    } else {
+                      echo '<span class="nillBill">No bill has been uploaded yet.</span>';
+                    }
+                  } else if($user_role == 'editor'){ // Condition for finance team
+                    if(get_field('vendor_bill')){ // already has bill
+                      ?>
+                      <div class="billResult">
+                        <table>
+                            <tr>
+                              <td>Vendor Bill</td>
+                              <td><a href="<?php the_field('vendor_bill'); ?>" target="_blank"><?php the_field('vendor_bill'); ?></a></td>
+                            </tr>
+                        </table>
+                      </div>
+                      <?php
+                    } else { // No bills yet; so form to upload
+                      ?>
+                      <form enctype="multipart/form-data" id="uploadBill">
+                        <div class="row">
+                          <div class="col s12">
+                            <span id="noEmpty">Please select a file</span>
+                            <div class="file-field input-field">
+                              <!-- <input type="file" id="sortpicture" name="upload"> -->
+                              <div class="btn btn-small">
+              				            <span>Select Vendor Bill</span>
+              				            <input type="file" id="sortbill" name="uploadBillField"/>
+              				        </div>
+              				        <div class="file-path-wrapper">
+              				            <input class="file-path validate" type="text" id="fileName">
+              				        </div>
+                            </div>
+                          </div>
+                        </div>
+                          <input type="hidden" value="<?php echo get_the_ID(); ?>" id="post_id_5" name="post_id_5"/>
+                      <!-- <input class="save-support" name="save_support" type="button" value="Save"> -->
+                        <div class="row uploadBillSubmit">
+              						<div class="input-field col s12">
+              							<button class="btn waves-effect waves-light save-support" name="uploadBillButton" id="uploadBillButton">Upload
+              								<i class="material-icons right">send</i>
+              							</button>
+              							<input type="hidden" name="action" value="myfilter">
+              						</div>
+              					</div>
+                       </form>
+                      <?php
+                    }
+                  } else { // condition for administrator
+                    if(get_field('vendor_bill')){ // already has bill
+                      ?>
+                      <div class="billResult">
+                        <table>
+                            <tr>
+                              <td>Vendor Bill</td>
+                              <td><a href="<?php the_field('vendor_bill'); ?>" target="_blank"><?php the_field('vendor_bill'); ?></a></td>
+                            </tr>
+                        </table>
+                      </div>
+                      <?php
+                    } else {
+                      echo 'No bill has been uploaded yet.';
+                    }
                   }
                   ?>
+                </div>
+                <!-- Payment Status -->
+                <div class="payment_status">
+                  <hr/>
+                  <h5>Payment Status</h5>
+                  <?php
+                  if( $user_role == 'author'){ // Condition for Employee
+                    ?>
+                    <div id="result"><table>
+                      <thead>
+                        <tr>
+                          <td>Amount Paid to the Vendor</td>
+                          <td>Bill Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><?php the_field('amount_paid_to_vendor'); ?></td>
+                          <td><?php the_field('order_status'); ?></td>
+                        </tr>
+                      </tbody>
+                    </table></div>
+                    <?php
+                  }
+                  else if($user_role == 'contributor'){ // Condition for Vertical Head
+                    ?>
+                    <div id="result"><table>
+                      <thead>
+                        <tr>
+                          <td>Amount Paid to the Vendor</td>
+                          <td>Bill Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><?php the_field('amount_paid_to_vendor'); ?></td>
+                          <td><?php the_field('order_status'); ?></td>
+                        </tr>
+                      </tbody>
+                    </table></div>
+                    <?php
+                  }
+                  else if($user_role == 'editor'){
+                    // vars
+                    // $order_status = get_field('order_status');
+                    if($order_status == 'Closed'){ // if Order is closed
+                      ?>
+                      <div id="paid-result"><table>
+                        <thead>
+                          <tr>
+                            <td>Amount Paid to the Vendor</td>
+                            <td>Bill Status</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><?php the_field('amount_paid_to_vendor'); ?></td>
+                            <td><?php the_field('order_status'); ?></td>
+                          </tr>
+                        </tbody>
+                      </table></div>
+                      <?php
+                    } else { // if Order is open
+                      if(get_field('amount_paid_to_vendor')){ // if Amount field has some value
+                        ?>
+                        <div id="paid-result"><table>
+                          <thead>
+                            <tr>
+                              <td>Amount Paid to the Vendor</td>
+                              <td>Bill Status</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><?php the_field('amount_paid_to_vendor'); ?></td>
+                              <td><?php the_field('order_status'); ?></td>
+                            </tr>
+                          </tbody>
+                        </table></div>
+                        <?php
+                      } else { // if Amount field is empty
+                        ?><div id="paid-result"></div><?php
+                      }
+                    ?>
+                    <form action="<?php echo site_url() ?>/update_paymentStatus.php" method="POST" id="paymentSubmit">
+                      <h6>Update payment status</h6>
+                      <div class="row">
+                        <div class="col m6 input-field">
+              							<input id="paidToVendor" type="number" class="paid validate" required="required" aria-required="true" <?php if(get_field('amount_paid_to_vendor')){ ?>value="<?php the_field('amount_paid_to_vendor'); ?>"<?php } ?>>
+              		          <label for="paidToVendor">Amount Paid to Vendor</label>
+              							<span class="helper-text" data-error="wrong" data-success="right">Only number</span>
+                        </div>
+                        <div class="col m6 input-field">
+                          <label>
+                            <input type="checkbox" id="status"/>
+                            <span>Bill Closed</span>
+                          </label>
+                        </div>
+                      </div>
+                      <input type="hidden" value="<?php echo get_the_ID(); ?>" id="post_id_2"/>
+                      <div class="row paymentresult">
+            						<div class="input-field col s12">
+            							<button class="btn waves-effect waves-light">Update</button>
+            							<input type="hidden" name="action" value="myfilter">
+            						</div>
+            					</div>
+                    </form>
+                    <?php
+                    }
+                  } else { // for Admin
+                    ?>
+                    <div class="paid-result"><table>
+                      <thead>
+                        <tr>
+                          <td>Amount Paid to the Vendor</td>
+                          <td>Bill Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><?php the_field('amount_paid_to_vendor'); ?></td>
+                          <td><?php the_field('order_status'); ?></td>
+                        </tr>
+                      </tbody>
+                    </table></div>
+                    <?php
+                  } ?>
                 </div>
             </div>
             <div class="col l3 s12" id="secondary">
