@@ -1,0 +1,224 @@
+/* Custom Styling */
+.successMessage{
+  background-color: #3AD3B5;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  display: none;
+}
+.successMessage a{color: #fff; text-decoration: underline;}
+.approveStatus{ background-color: #f7f7f7; padding: .7rem 1rem; margin-top: 1rem;}
+.approveStatus .approvedByDisplayName{text-decoration: underline;}
+nav{
+  background-color: #fff;
+  color: #000;
+}
+nav a{color: #000;}
+nav ul a{color: #a2a2a2;}
+nav .brand-logo{
+  font-size: 1.2rem;
+  padding: 0 15px;
+  margin: 0 18px;
+  color: #000;
+}
+nav .brand-logo img{
+  max-width: 120px;
+  padding: 12px 0px;
+  margin-right: 1rem;
+  display: block;
+  float: left;
+}
+.sidenav li a{
+  border-left: 3px solid #FE616A;
+  background-color: #ffedee;
+}
+.sidenav li a.subheader{
+  border: none;
+  background-color: #fff;
+}
+.sidenav li a:hover{
+  background-color: #fbc0c4;
+}
+.branding{
+  display: block;
+  margin: 2.5rem;
+  text-align: center;
+  color: #000;
+  font-size: 1.2rem;
+}
+.branding img{max-width: 120px;}
+.sidenav .widget_calendar{
+  margin: 1rem 1.5rem;
+}
+/* Link within card */
+.card a{
+  font-weight: bold;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+.card a.waves-effect.waves-light.btn-small {
+    font-weight: normal;
+    margin-left: 1rem;
+    text-decoration: none;
+}
+/* Weekly report */
+.page-title-container{
+  background-color: #3F83FD;
+  padding: 1rem 0;
+}
+.page-title-container h1.page-title{
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  margin: 0;
+  color: #fff;
+  display: inline-block;
+}
+.page-template-page-weeklyReport .page-content{
+  background: url(/mediaMonitor/wp-content/themes/TPR_material/img/desktop_dialog.jpg) repeat center center;
+  background-size: cover;
+  padding: 4rem 0 3rem;
+  color: #fff;
+}
+.sectionTitle{
+  font-size: 20px;
+}
+.sectionTitle:after{
+  background-color: #fff;
+  height: 2px;
+  width: 20px;
+  clear: both;
+  content: '';
+  display: block;
+  margin-top: .3em;
+}
+a.card{
+  display: block;
+}
+.foodforthought{
+  margin-top: 1rem;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 40px;
+  -moz-column-gap: 40px;
+  column-gap: 40px;
+}
+.foodforthought p{margin: 0;}
+.fortnight-articles{
+  padding: 4rem 0 3rem;
+}
+.fortnight-articles .sectionTitle:after{background-color: #a2a2a2;}
+.dashboard{
+  background-color: #f4f4f4;
+  padding: 4rem 0 3rem;
+}
+span.date {
+  color: #868686;
+  font-size: .8rem;
+}
+span.top{
+  text-transform: uppercase;
+  font-size: .6rem;
+  color: #868686;
+  font-weight: bold;
+}
+.chart{
+  width: 100%;
+  padding: 2rem 0;
+}
+.fortnight-articles .card{
+  border-top: 4px solid #a4a4a4;
+  box-shadow: none;
+}
+div.google-visualization-tooltip { padding: .5rem; }
+.fortnight-articles .card:hover{
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+.technology .card{ border-color: #009E57; } .technology .subSectionTitle{ color: #009E57; }
+.environment .card{ border-color: #F8B600; } .environment .subSectionTitle{ color: #F8B600; }
+.regulatory .card{ border-color: #DF4230; } .regulatory .subSectionTitle{ color: #DF4230; }
+.monetary .card{ border-color: #3F83FD; } .monetary .subSectionTitle{ color: #3F83FD; }
+
+.stakeholders-fortnight{
+
+  padding: 4rem 0 3rem;
+}
+.stakeholder{
+  text-align: center;
+}
+.stakeholder .card-title{
+  color: #009E57;
+}
+.stakeholder .card-title:after{
+  height: 3px;
+  background-color: #009E57;
+  width: 20px;
+  content: '';
+  display: block;
+  margin: 10px auto 0;
+}
+.stakeholders-fortnight .sectionTitle{
+  margin-bottom: 1rem;
+}
+.stakeholders-fortnight .sectionTitle:after{
+  background-color: #000;
+}
+.stakeholder .image img{
+  border-radius: 50%;
+}
+.featured-story{
+  padding: 4rem 0 3rem;
+}
+.featured-story .sectionTitle{
+  color: #F8B600;
+  margin-bottom: 1rem;
+}
+.featured-story .sectionTitle:after{
+  background-color: #F8B600;
+}
+.featured-story .sectionTitle:after{background-color: #F8B600;}
+.featured-story .story{
+  border-top: 4px solid #F8B600;
+}
+.contributor-story{
+  padding: 4rem 0 3rem;
+  background-color: #009E57;
+  color: #fff;
+}
+.contributor-story .image img{
+  border-radius: 50%;
+  max-width: 150px;
+}
+.homeChart{
+  background-color: #f4f4f4;
+  padding: 3rem 0 3rem;
+}
+/* Footer Styling */
+footer{
+  margin: 2rem 0;
+}
+.copyright{
+  color: #a2a2a2;
+}
+.tpr-logo{
+  margin-top: 1.2rem;
+}
+.tpr-logo img{
+  display: block;
+  margin: 0 auto;
+  max-width: 150px;
+}
+/* Media Query */
+/* Medium and up */
+@media screen and (min-width: 40em) {
+  .chart{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+/* Large and up */
+@media screen and (min-width: 64em) {
+  footer{
+    margin: 4rem 0 2rem;
+  }
+}

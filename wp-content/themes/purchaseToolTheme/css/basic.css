@@ -1,0 +1,44 @@
+/*
+	post navigation
+*/
+.page_navigation {
+    margin: 1rem 0;
+}
+.navigation {
+    display: inline-block;
+    float: left;
+}
+.navigation a {
+    background-color: #bdbdbd;
+    padding: .7rem 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+}
+.navigation.next {
+    float: right;
+}
+/*
+	Search bar
+*/
+#search-form {
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+.top-bar #search-form input[type=search], .off-canvas #search-form input[type=search] {
+    max-width: 150px;
+    margin-right: 0;
+    margin-bottom: 0;
+    float: left;
+    font-size: .8rem;
+    height: 2rem;
+    color: #777;
+    box-shadow: none;
+}
+.top-bar #search-submit, .off-canvas #search-submit {
+    margin: 0 0;
+    padding: .49rem .7rem;
+    background-color: transparent;
+    color: #777;
+    border: 1px solid #cacaca;
+}

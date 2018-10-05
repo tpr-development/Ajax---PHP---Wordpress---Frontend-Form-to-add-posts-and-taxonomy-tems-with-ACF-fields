@@ -1,0 +1,8 @@
+/*
+* Print CSS
+*/
+@media print{
+	.sidebar, .header{
+	display: none;
+}
+}
