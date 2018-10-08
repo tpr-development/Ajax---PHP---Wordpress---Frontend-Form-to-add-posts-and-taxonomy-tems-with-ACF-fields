@@ -1,5 +1,5 @@
 Hello WordPress - Web publishing software
-
+Aloha!!
 Copyright 2011-2018 by the contributors
 
 This program is free software; you can redistribute it and/or modify
