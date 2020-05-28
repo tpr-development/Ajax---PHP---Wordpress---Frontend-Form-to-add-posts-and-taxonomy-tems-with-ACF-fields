@@ -12,7 +12,7 @@
 <footer id="colophon" class="site-footer clearfix" role="contentinfo">
     <div class="row">
         <div class="col l12 s12 copyright center-align">
-            Copyright @ Google, All rights reserved. Powered by <a href="http://the-practice.net/" target="_blank">The PRactice</a>
+            Copyright The PRactice All rights reserved. Powered by <a href="http://the-practice.net/" target="_blank">The PRactice</a>
         </div>
         <div class="col m4 s12 offset-m4 tpr-logo"><img class="" src="<?php echo get_template_directory_uri().'/img/new-logo.png'; ?>"></div>
     </div>
